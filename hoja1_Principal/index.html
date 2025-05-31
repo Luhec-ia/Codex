@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>El Cubo – WebApp</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Barra superior -->
+  <div class="top-bar">
+    <div class="scroll-buttons">
+      <button data-section="Outfit"><img src="images/logo_outfit.png"              alt="Outfit" /></button>
+      <button data-section="Fitness"><img src="images/pesas.png"                   alt="Fitness" /></button>
+      <button data-section="Vámonos"><img src="images/logo_vamonos.png"            alt="Vámonos" /></button>
+      <button data-section="Ocio"><img src="images/logo_videojuego.png"            alt="Ocio"   /></button>
+      <button data-section="Ánima"><img src="images/imagnen_Anima.png"             alt="Ánima"  /></button>
+      <button data-section="Alimentación"><img src="images/logo_salud_alimentacion1.png" alt="Alimentación" /></button>
+    </div>
+    <div class="selected-section no-select" id="sectionTitle">Outfit</div>
+  </div>
+
+  <!-- Cubo -->
+  <div class="cube-wrapper">
+    <div class="cube" id="cube">
+      <div class="cube-face front"  data-name="Outfit"><img src="images/logo_outfit.png"              alt="Outfit" /></div>
+      <div class="cube-face back"   data-name="Fitness"><img src="images/pesas.png"                   alt="Fitness" /></div>
+      <div class="cube-face right"  data-name="Vámonos"><img src="images/logo_vamonos.png"            alt="Vámonos" /></div>
+      <div class="cube-face left"   data-name="Ocio"><img src="images/logo_videojuego.png"            alt="Ocio"   /></div>
+      <div class="cube-face top"    data-name="Ánima"><img src="images/imagnen_Anima.png"             alt="Ánima"  /></div>
+      <div class="cube-face bottom" data-name="Alimentación"><img src="images/logo_salud_alimentacion1.png" alt="Alimentación" /></div>
+    </div>
+  </div>
+
+  <div class="site-name-wrapper">
+    <div class="site-name no-select">
+      El Cubo
+    </div>
+  </div>
+
+  <!-- Texto descriptivo -->
+  <div class="text-dynamic no-select" id="sectionText">
+    Inspiración diaria para tus outfits favoritos. ¡Descubre nuevas combinaciones
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+/* ==== reset ==== */
+*{box-sizing:border-box;margin:0;padding:0}
+img{-webkit-user-drag:none}
+
+/* ==== fondo ==== */
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:url('images/ImagenCuboEsmeralda.png') center/cover fixed;
+  color:#fff;display:flex;flex-direction:column;min-height:100vh;overflow:hidden;
+}
+
+/* ==== barra superior ==== */
+.top-bar{display:flex;flex-direction:column;align-items:center;padding:10px}
+.scroll-buttons{display:flex;gap:10px;overflow-x:auto;padding:5px;width:100%;justify-content:center;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.scroll-buttons::-webkit-scrollbar{display:none}
+.scroll-buttons button{
+  width:50px;height:50px;border-radius:50%;flex-shrink:0;cursor:pointer;
+  border:2px solid #00ffff;background:rgba(0,0,0,.3);
+  display:flex;justify-content:center;align-items:center;
+  transition:transform .2s,border-color .2s;
+  box-shadow:0 0 10px rgba(0,255,255,.3)
+}
+.scroll-buttons button:hover{transform:scale(1.1);border-color:#00e5ff}
+.scroll-buttons img{width:90%;height:auto;filter:drop-shadow(0 0 6px rgba(0,255,255,.5))}
+
+/* título sección */
+.no-select{-webkit-user-select:none !important;-webkit-touch-callout:none !important;user-select:none !important}
+.selected-section{margin-top:10px;font-size:24px;font-weight:bold;color:#00ffff;text-shadow:0 0 8px rgba(0,255,255,.8)}
+
+/* ==== cubo ==== */
+.cube-wrapper{perspective:4200px;height:400px;display:flex;justify-content:center;align-items:center}
+.cube{
+  width:140px;height:140px;position:relative;transform-style:preserve-3d;
+  animation:spin 15s linear infinite;transition:transform .6s ease;
+  box-shadow:0 15px 40px rgba(0,255,255,.4),0 40px 80px rgba(0,255,255,.05);
+  cursor:grab;touch-action:none;-webkit-user-select:none !important;-webkit-touch-callout:none !important;user-select:none !important;
+}
+@keyframes spin{from{transform:rotateX(0) rotateY(0);}to{transform:rotateX(360deg) rotateY(360deg);}}
+.cube.paused,.cube.paused *{animation-play-state:paused!important;transition:none!important}
+
+/* caras */
+.cube-face{
+  position:absolute;width:140px;height:140px;border-radius:10px;
+  background:rgba(0,255,255,.05);border:2px solid rgba(0,255,255,.1);
+  box-shadow:inset 0 0 15px rgba(0,255,255,.1);backdrop-filter:blur(5px);
+  display:flex;justify-content:center;align-items:center;
+  touch-action:none;   /* arrastre iOS */
+}
+.cube-face img{
+  width:60%;height:60%;filter:drop-shadow(0 0 8px rgba(0,255,255,.8));
+  pointer-events:none;-webkit-touch-callout:none;
+}
+
+/* posiciones */
+.front{transform:translateZ(70px)}
+.back{transform:rotateY(180deg) translateZ(70px)}
+.right{transform:rotateY(90deg) translateZ(70px)}
+.left{transform:rotateY(-90deg) translateZ(70px)}
+.top{transform:rotateX(90deg) translateZ(70px)}
+.bottom{transform:rotateX(-90deg) translateZ(70px)}
+
+/* ==== rayo luminoso ==== */
+.cube-face::after{
+  content:'';position:absolute;inset:-3px;border-radius:12px;pointer-events:none;
+  background:conic-gradient(from 0deg, transparent 0deg, #00ffff 120deg, transparent 120deg);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite:xor;-webkit-mask-composite:xor;
+  mix-blend-mode:screen;opacity:0;z-index:2;
+}
+.cube.loading .cube-face.active::after{
+  animation:trace 2s linear forwards;opacity:.9;
+}
+@keyframes trace{from{transform:rotate(0turn)}to{transform:rotate(1turn)}}
+
+/* destello final */
+.cube.done::after{
+  content:'';position:absolute;inset:-8px;border-radius:14px;pointer-events:none;
+  background:radial-gradient(circle,rgba(0,255,255,.95) 10%,rgba(0,255,255,0) 60%);
+  animation:flash .3s ease-out forwards;z-index:3;
+}
+@keyframes flash{from{opacity:0}50%{opacity:1}to{opacity:0}}
+
+/* texto dinámico */
+.text-dynamic{padding:20px;text-align:center;font-size:16px;min-height:60px;margin:20px;border-radius:12px;background:transparent;color:#fff}
